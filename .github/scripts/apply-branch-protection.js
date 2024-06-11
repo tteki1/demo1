@@ -1,7 +1,10 @@
-const { Octokit } = require("@octokit/rest");
+const { request } = require('@octokit/request');
 
-const octokit = new Octokit({
-  auth: "ENV_GITHUB_TOKEN"
+const octokit = request.defaults({
+  baseUrl: 'https://api.github.com',
+  headers: {
+    authorization: `token ENV_GITHUB_TOKEN`
+  }
 });
 
 async function run() {
