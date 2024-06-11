@@ -19,12 +19,12 @@ jobs:
           script: |
             const { context, GitHub } = require('@actions/github');
 
-            const repo = context.repo;
+            const repoContext = context.repo;
             const branch = 'main';
             const octokit = new GitHub(process.env.ENV_GITHUB_PAT);
 
             octokit.repos.updateBranchProtection({
-              ...repo,
+              ...repoContext,
               branch: branch,
               required_status_checks: {
                 strict: true,
