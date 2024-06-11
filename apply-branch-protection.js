@@ -1,9 +1,15 @@
-const { Octokit } = require("@octokit/rest");
+const { Octokit } = require("@octokit/core");
+const fetch = require("node-fetch");
 
 const token = process.env.GITHUB_TOKEN;
 const [owner, repo] = process.env.GITHUB_REPOSITORY.split("/");
 
-const octokit = new Octokit({ auth: token });
+const octokit = new Octokit({
+  auth: token,
+  request: {
+    fetch: fetch
+  }
+});
 
 async function applyBranchProtection() {
   try {
@@ -25,7 +31,7 @@ async function applyBranchProtection() {
       restrictions: null
     };
 
-    await octokit.repos.updateBranchProtection(branchProtectionSettings);
+    await octokit.request('PUT /repos/{owner}/{repo}/branches/{branch}/protection', branchProtectionSettings);
 
     console.log("Branch protection rules applied successfully");
   } catch (error) {
