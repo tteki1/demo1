@@ -16,13 +16,13 @@ jobs:
       - name: Set up branch protection rules
         uses: actions/github-script@v5
         with:
-          github-token: ${{ secrets.GITHUB_PAT }}
+          github-token: ${{ secrets.ENV_GITHUB_PAT }}
           script: |
             const { context, GitHub } = require('@actions/github');
 
             const repo = context.repo;
             const branch = 'main';
-            const octokit = new GitHub(process.env.GITHUB_PAT);
+            const octokit = new GitHub(process.env.ENV_GITHUB_PAT);
 
             octokit.repos.updateBranchProtection({
               ...repo,
