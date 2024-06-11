@@ -1,14 +1,13 @@
-const { request } = require('@octokit/request');
+const { Octokit } = require("@octokit/rest");
+const fetch = require("node-fetch"); // Import fetch explicitly
 
-const octokit = request.defaults({
-  baseUrl: 'https://api.github.com',
-  headers: {
-    authorization: `token ENV_GITHUB_TOKEN`
-  }
+const octokit = new Octokit({
+  auth: "ENV_GITHUB_TOKEN",
+  request: { fetch }
 });
 
 async function run() {
-  const owner = 'tteki1';
+  const owner = 'tteki';
   const repo = 'demo1';
   const branch = 'main';
 
