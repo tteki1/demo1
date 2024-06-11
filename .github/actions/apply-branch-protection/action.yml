@@ -1,0 +1,10 @@
+name: 'Apply Branch Protection Rules'
+description: 'An action to apply branch protection rules to a repository'
+author: 'Your Name'
+runs:
+  using: 'node12'
+  main: 'index.js'
+inputs:
+  token:
+    description: 'GitHub token'
+    required: true
