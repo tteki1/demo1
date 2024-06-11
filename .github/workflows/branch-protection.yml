@@ -1,0 +1,19 @@
+name: Apply Branch Protection Rules
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  apply-branch-protection:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Apply branch protection rules
+        uses: ./.github/actions/apply-branch-protection
+        with:
+          token: ${{ secrets.ENV_GITHUB_TOKEN }}
