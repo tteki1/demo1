@@ -14,6 +14,6 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Apply branch protection rules
-        uses: .github/actions/apply-branch-protection
+        uses: ./.github/actions/apply-branch-protection
         with:
           token: ${{ secrets.ENV_GITHUB_TOKEN }}
