@@ -19,10 +19,10 @@ jobs:
 
       - name: Set up branch protection rules
         env:
-          GITHUB_TOKEN: ${{ secrets.ENV_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           curl -X PUT -H "Accept: application/vnd.github.v3+json" \
-            -H "Authorization: token $ENV_GITHUB_TOKEN" \
+            -H "Authorization: token $GITHUB_TOKEN" \
             https://api.github.com/repos/${{ github.repository_owner }}/${{ github.event.repository.name }}/branches/main/protection \
             -d '{
               "required_status_checks": {
