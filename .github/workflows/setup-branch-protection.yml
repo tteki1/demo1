@@ -1,28 +1,24 @@
-name: Setup Repository
+name: Apply Branch Protection Rules
 
 on:
   push:
     branches:
       - main
 
+permissions:
+  contents: write
+  administration: write
+
 jobs:
-  setup-repository:
+  apply-branch-protection:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Create predefined branches
-        run: |
-          chmod +x create-branches.sh
-          ./create-branches.sh
-
       - name: Set up branch protection rules
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_PAT: ${{ secrets.ENV_GITHUB_PAT }}
         run: |
           curl -X PUT -H "Accept: application/vnd.github.v3+json" \
-            -H "Authorization: token $GITHUB_TOKEN" \
+            -H "Authorization: token $ENV_GITHUB_PAT" \
             https://api.github.com/repos/${{ github.repository_owner }}/${{ github.event.repository.name }}/branches/main/protection \
             -d '{
               "required_status_checks": {
