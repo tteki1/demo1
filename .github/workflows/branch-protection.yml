@@ -19,9 +19,9 @@ jobs:
           node-version: '16'
 
       - name: Install dependencies
-        run: npm install @octokit/rest
+        run: npm install @octokit/core node-fetch
 
       - name: Apply branch protection rules
         env:
-          GITHUB_TOKEN: ${{ secrets.ENV_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node apply-branch-protection.js
